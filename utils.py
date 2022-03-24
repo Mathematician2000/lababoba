@@ -1,14 +1,6 @@
 import streamlit as st
 
 
-@st.cache()
-def init_page_config() -> None:
-    st.set_page_config(
-        page_title='ЛабаБоба!',
-        page_icon='https://raw.githubusercontent.com/Mathematician2000/lababoba/master/icon.png',
-    )
-
-
 def set_background(url: str) -> None:
     css_style = rf'''
         <style>
