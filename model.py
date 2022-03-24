@@ -1,9 +1,12 @@
+import os
+from pathlib import Path
 import re
 from typing import Any
 
 from razdel import sentenize
 from simpletransformers.language_generation import LanguageGenerationModel
 import streamlit as st
+from yadisk import YaDisk
 
 
 TOP_K = 50
@@ -57,8 +60,25 @@ class LabaBobaModel:
         self.output = ''
 
 
+FOLDER_LENGTH = 8
+
+
 @st.cache(allow_output_mutation=True, max_entries=1)
 def load_model(**kwargs: Any) -> LabaBobaModel:
+    folder = 'LM_outputs'
+    folder_path = Path(folder)
+    if (not folder_path.is_dir() or
+            len(list(folder_path.iterdir())) < FOLDER_LENGTH):
+        with st.spinner('Скачиваем модельку... Придётся подождать.'):
+            folder_path.mkdir(exist_ok=True)
+            ya = YaDisk(token=os.environ.get('YADISK_OAUTH_TOKEN'))
+            if not ya.check_token():
+                raise ValueError('Token check failed')
+            for file in ya.listdir(f'/LabaBoba v1/{folder}'):
+                filename = file.name
+                path = f'{folder}/{filename}'
+                ya.download(f'/LabaBoba v1/{path}', path)
+
     return LabaBobaModel(
         'gpt2',
         'LM_outputs',
@@ -66,4 +86,5 @@ def load_model(**kwargs: Any) -> LabaBobaModel:
         args=kwargs,
     )
 
-model = load_model(**MODEL_ARGS)
+
+MODEL = load_model(**MODEL_ARGS)

@@ -2,17 +2,23 @@ import streamlit as st
 
 st.set_page_config(
     page_title='ЛабаБоба!',
-    page_icon='https://raw.githubusercontent.com/Mathematician2000/lababoba/master/icon.png',
+    page_icon=(
+        'https://raw.githubusercontent.com/Mathematician2000/'
+        'lababoba/master/icon.png'
+    ),
 )
 
 
 from model import (
-    model, DEFAULT_MAX_LEN, HEIGHT, MIN_LEN, MAX_CHARS, MAX_LEN,
+    DEFAULT_MAX_LEN, HEIGHT, MAX_CHARS, MAX_LEN, MIN_LEN, MODEL,
 )
 from utils import set_background
 
 
-set_background('https://raw.githubusercontent.com/Mathematician2000/lababoba/master/background.png')
+set_background(
+    'https://raw.githubusercontent.com/Mathematician2000/'
+    'lababoba/master/background.png'
+)
 
 
 st.title('ЛабаБоба приветствует Вас!')
@@ -48,11 +54,11 @@ max_length = st.slider(
 button = st.button('Налабабобить')
 
 
-model.clear_output()
+MODEL.clear_output()
 if button:
     try:
         if prompt:
-            model.run_model(
+            MODEL.run_model(
                 prompt,
                 max_length=max_length,
             )
@@ -62,7 +68,7 @@ if button:
             f'JUST LOOK AT THIS MADNESS:\n{err}'
         )
 
-st.markdown(model.get_last_output())
+st.markdown(MODEL.get_last_output())
 
 st.markdown('_' * 10)
 st.markdown('by [Mathematician2000](https://gitlab.com/Mathematician2000)')
