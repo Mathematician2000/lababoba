@@ -1,7 +1,8 @@
 import streamlit as st
 
-from utils import (
-    model, set_background,
+from utils import set_background
+from model import (
+    model,
     DEFAULT_MAX_LEN, HEIGHT, MIN_LEN, MAX_CHARS, MAX_LEN,
 )
 
