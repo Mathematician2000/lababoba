@@ -57,7 +57,7 @@ class LabaBobaModel:
         self.output = ''
 
 
-@st.cache(allow_output_mutation=True, suppress_st_warning=True)
+@st.cache(allow_output_mutation=True, max_entries=1)
 def load_model(**kwargs: Any) -> LabaBobaModel:
     return LabaBobaModel(
         'gpt2',
