@@ -83,7 +83,6 @@ def set_background(filename):
           .stApp {{
             background-image: url("data:image/png;base64,{binary}") left top no-repeat;
             background-size: 100%;
-            color: #fff;
           }}
         </style>
     '''

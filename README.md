@@ -7,8 +7,8 @@ Powered by `streamlit`. Based on **GPT-2**.
 ## Implementation details
 + Based on pretrained HF [GPT-2 model](https://huggingface.co/sberbank-ai/rugpt3small_based_on_gpt2)
 + Trained and evaluated on texts from [humor corpus](https://github.com/computational-humor/humor-recognition/tree/master/data)
-+ Zero-shot [perplexity](https://en.wikipedia.org/wiki/Perplexity): $\approx 71.8518$
-+ Perplexity after one trainig epoch: $\approx 49.0305$
++ Zero-shot [perplexity](https://en.wikipedia.org/wiki/Perplexity) ≈ 71.8518
++ Perplexity after one trainig epoch ≈ 49.0305
 
 ## Features
 + Inference caching for performance optimization
