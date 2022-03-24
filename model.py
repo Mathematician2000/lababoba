@@ -53,6 +53,9 @@ class LabaBobaModel:
     def get_last_output(self) -> str:
         return self.output
 
+    def clear_output(self) -> None:
+        self.output = ''
+
 
 @st.cache(allow_output_mutation=True, suppress_st_warning=True)
 def load_model(**kwargs: Any) -> LabaBobaModel:

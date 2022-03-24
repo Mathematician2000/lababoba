@@ -9,6 +9,7 @@ from model import (
 
 set_background('https://raw.githubusercontent.com/Mathematician2000/lababoba/master/background.png')
 
+
 st.title('ЛабаБоба приветствует Вас!')
 st.markdown(r'''
 Даже не делайте вид, что не узнали меня.
@@ -41,6 +42,8 @@ max_length = st.slider(
 
 button = st.button('Налабабобить')
 
+
+model.clear_output()
 if button:
     try:
         if prompt:
