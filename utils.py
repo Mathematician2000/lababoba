@@ -78,12 +78,13 @@ def png_to_base64(filename):
 
 def set_background(filename):
     binary = png_to_base64(filename)
-    css_style = '''
+    css_style = fr'''
         <style>
-          .stApp {
-            background-image: url("data:image/png;base64,%s");
-            background-size: cover;
-          }
+          .stApp {{
+            background-image: url("data:image/png;base64,{binary}") left top no-repeat;
+            background-size: 100%;
+            color: #fff;
+          }}
         </style>
-    ''' % binary
+    '''
     st.markdown(css_style, unsafe_allow_html=True)
