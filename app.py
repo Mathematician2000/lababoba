@@ -7,7 +7,6 @@ from model import (
 )
 
 
-# set_background('background.png')
 set_background('https://raw.githubusercontent.com/Mathematician2000/lababoba/master/background.png')
 
 st.title('ЛабаБоба приветствует Вас!')

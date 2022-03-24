@@ -1,4 +1,5 @@
 import re
+from typing import Any
 
 from razdel import sentenize
 from simpletransformers.language_generation import LanguageGenerationModel
@@ -26,15 +27,15 @@ MODEL_ARGS = {
 
 
 class LabaBobaModel:
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any):
         self.model = LanguageGenerationModel(*args, **kwargs)
         self.output = ''
 
-    def run_model(self, prompt, **kwargs):
+    def run_model(self, prompt: str, **kwargs: Any) -> None:
         output = self.model.generate(prompt, args=kwargs)[0]
         puncts = ',.!?…»'
         continuation = re.sub(
-            r'(?P<punct>[\{puncts}])(?P<ch>[А-ЯЁA-Z"«-])',
+            rf'(?P<punct>[\{puncts}])(?P<ch>[А-ЯЁA-Z"«-])',
             r'\g<punct> \g<ch>',
             output[len(prompt):],
         )
@@ -49,12 +50,12 @@ class LabaBobaModel:
             output = output.replace(f' {ch} ', f'{ch} ')
         self.output = output
 
-    def get_last_output(self):
+    def get_last_output(self) -> str:
         return self.output
 
 
 @st.cache(allow_output_mutation=True, suppress_st_warning=True)
-def load_model(**kwargs):
+def load_model(**kwargs: Any) -> LabaBobaModel:
     return LabaBobaModel(
         'gpt2',
         'LM_outputs',
