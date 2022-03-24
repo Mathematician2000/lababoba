@@ -1,12 +1,13 @@
 import streamlit as st
 
-from utils import set_background
+from utils import init_page_config, set_background
 from model import (
     model,
     DEFAULT_MAX_LEN, HEIGHT, MIN_LEN, MAX_CHARS, MAX_LEN,
 )
 
 
+init_page_config()
 set_background('https://raw.githubusercontent.com/Mathematician2000/lababoba/master/background.png')
 
 
