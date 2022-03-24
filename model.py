@@ -32,7 +32,7 @@ class LabaBobaModel:
 
     def run_model(self, prompt, **kwargs):
         output = self.model.generate(prompt, args=kwargs)[0]
-        puncts = '.!?…»'
+        puncts = ',.!?…»'
         continuation = re.sub(
             r'(?P<punct>[\{puncts}])(?P<ch>[А-ЯЁA-Z"«-])',
             r'\g<punct> \g<ch>',
@@ -45,7 +45,7 @@ class LabaBobaModel:
         continuation = ' '.join(sentences)
 
         output = f'**{prompt}** {continuation}'.replace('  ', ' ')
-        for ch in pucnts:
+        for ch in puncts:
             output = output.replace(f' {ch} ', f'{ch} ')
         self.output = output
 
