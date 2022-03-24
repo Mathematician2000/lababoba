@@ -9,9 +9,9 @@ import streamlit as st
 TOP_K = 50
 TOP_P = 0.95
 
-MIN_LEN = 10
+MIN_LEN = 20
 MAX_LEN = 50
-DEFAULT_MAX_LEN = 20
+DEFAULT_MAX_LEN = 25
 
 HEIGHT = 200
 MAX_CHARS = 1000
