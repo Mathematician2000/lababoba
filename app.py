@@ -1,13 +1,15 @@
 import streamlit as st
 
-import utils
+from utils import init_page_config, set_background
+init_page_config()
+
 from model import (
     model,
     DEFAULT_MAX_LEN, HEIGHT, MIN_LEN, MAX_CHARS, MAX_LEN,
 )
 
 
-utils.set_background('https://raw.githubusercontent.com/Mathematician2000/lababoba/master/background.png')
+set_background('https://raw.githubusercontent.com/Mathematician2000/lababoba/master/background.png')
 
 
 st.title('ЛабаБоба приветствует Вас!')

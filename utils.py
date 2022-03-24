@@ -8,8 +8,6 @@ def init_page_config() -> None:
         page_icon='https://raw.githubusercontent.com/Mathematician2000/lababoba/master/icon.png',
     )
 
-init_page_config()
-
 
 def set_background(url: str) -> None:
     css_style = rf'''
