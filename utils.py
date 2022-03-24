@@ -1,7 +1,18 @@
 from base64 import b64encode
+import re
 
+from razdel import sentenize
 from simpletransformers.language_generation import LanguageGenerationModel
 import streamlit as st
+
+
+def init_page_config():
+    st.set_page_config(
+        page_title='ЛабаБоба!',
+        page_icon='icon.png',
+    )
+
+init_page_config()
 
 
 TOP_K = 50
@@ -24,20 +35,38 @@ MODEL_ARGS = {
 }
 
 
+class LabaBobaModel:
+    def __init__(self, *args, **kwargs):
+        self.model = LanguageGenerationModel(*args, **kwargs)
+        self.output = ''
+
+    def run_model(self, prompt, **kwargs):
+        output = self.model.generate(prompt, args=kwargs)[0]
+        continuation = re.sub(
+            r'(?P<punct>[\.!?…»])(?P<ch>[А-ЯЁA-Z"«-])',
+            r'\g<punct> \g<ch>',
+            output[len(prompt):],
+        )
+        sentences = list(sent.text for sent in sentenize(continuation))
+        if len(sentences) > 1 and sentences[-1][-1] not in '.!?…»':
+            sentences.pop()
+        continuation = ' '.join(sentences)
+        self.output = f'**{prompt}** {continuation}'.replace('  ', ' ')
+
+    def get_last_output(self):
+        return self.output
+
+
 @st.cache(allow_output_mutation=True, suppress_st_warning=True)
 def load_model(**kwargs):
-    return LanguageGenerationModel(
+    return LabaBobaModel(
         'gpt2',
         'LM_outputs',
         use_cuda=False,
         args=kwargs,
     )
 
-
 model = load_model(**MODEL_ARGS)
-
-def run_model(text, **kwargs):
-    return model.generate(text, args=kwargs)[0]
 
 
 @st.cache(allow_output_mutation=True)

@@ -1,4 +1,9 @@
-from utils import *
+import streamlit as st
+
+from utils import (
+    model, set_background,
+    DEFAULT_MAX_LEN, HEIGHT, MIN_LEN, MAX_CHARS, MAX_LEN,
+)
 
 
 set_background('background.png')
@@ -34,23 +39,21 @@ max_length = st.slider(
 )
 
 button = st.button('Налабабобить')
-output = ''
 
 if button:
     try:
         if prompt:
-            output = run_model(
+            model.run_model(
                 prompt,
                 max_length=max_length,
             )
-            output = f'**{prompt}** {output[len(prompt):]}'
     except Exception as err:
         st.exception(
             'OMG WHAT THE HELL IS GOING ON HERE '
             f'JUST LOOK AT THIS MADNESS:\n{err}'
         )
 
-st.markdown(output)
+st.markdown(model.get_last_output())
 
 st.markdown('_' * 10)
 st.markdown('by [Mathematician2000](https://gitlab.com/Mathematician2000)')
